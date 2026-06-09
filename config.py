@@ -1,6 +1,9 @@
-MYSQL_HOST = "localhost"
-MYSQL_USER = "root"
-MYSQL_PASSWORD = "Root123!"
-MYSQL_DB = "bharat_portfolio"
+import os
 
-SECRET_KEY = "bharat_secret_key"
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
+MYSQL_DB = os.getenv("MYSQL_DB")
+MYSQL_PORT = int(os.getenv("MYSQL_PORT", 3306))
+
+SECRET_KEY = "secret123"
