@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ILLA SAI BHARAT KUMAR | Portfolio</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                Bharat<span>.</span>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                 ☰
+           </div>
+            <ul class="nav-links">
+
+                <li><a href="#home">Home</a></li>
+
+                <li><a href="#about">About</a></li>
+
+                <li><a href="#skills">Skills</a></li>
+
+                <li><a href="#projects">Projects</a></li>
+
+                <li><a href="#experience">Experience</a></li>
+
+                <li><a href="#education">Education</a></li>
+
+                <li><a href="#profiles">Profiles</a></li>
+
+                <li><a href="#contact">Contact</a></li>
+
+            </ul>
+
+        </nav>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section id="home" class="hero">
+
+        <!-- Left -->
+        <div class="hero-content">
+
+            <h4>Hello, I'm</h4>
+
+            <h1>ILLA SAI BHARAT KUMAR</h1>
+
+            <h2><span id="typing-text">
+        Aspiring Software Developer
+           </span>
+         </h2>
+
+            <p>
+                Passionate Computer Science Engineering student
+                focused on software development,
+                problem-solving, and building real-world
+                applications using Python and modern web
+                technologies.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{{ url_for('static', filename='resume/resume.pdf') }}"
+                    target="_blank"
+                    class="btn resume-btn">
+
+                    Download Resume
+                </a>
+
+                <a href="tel:+916301606729"
+                    class="btn contact-btn">
+
+                    Contact Me
+                </a>
+
+            </div>
+
+            <div class="tech-stack">
+
+                <span>Python</span>
+
+                <span>DSA</span>
+
+                <span>Flask</span>
+
+                <span>Frontend</span>
+
+            </div>
+
+        </div>
+
+        <!-- Right -->
+        <div class="hero-image">
+
+            <img src="{{ url_for('static', filename='images/developer.png') }}"
+                alt="Developer Illustration">
+
+        </div>
+
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="reveal">
+
+        <h2>About Me</h2>
+
+        <p>
+            I am a Computer Science Engineering student at
+            Pragati Engineering College with a strong interest
+            in software development, problem-solving,
+            and building real-world projects.
+
+            I am currently focused on Frontend Development,
+            Python, Flask, and Data Structures & Algorithms
+            to strengthen my technical foundation and
+            become a skilled software developer.
+        </p>
+
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills">
+
+        <h2>Skills</h2>
+
+        <div class="skills-container">
+
+            <div class="skill-category">
+
+                <h3>Frontend</h3>
+
+                <p>
+                    HTML, CSS, JavaScript,
+                    React (Learning)
+                </p>
+
+            </div>
+
+            <div class="skill-category">
+
+                <h3>Programming Languages</h3>
+
+                <p>
+                    Python, Java, C
+                </p>
+
+            </div>
+
+            <div class="skill-category">
+
+                <h3>Core Skills</h3>
+
+                <p>
+                    Data Structures & Algorithms,
+                    Problem Solving
+                </p>
+
+            </div>
+
+            <div class="skill-category">
+
+                <h3>Tools & Frameworks</h3>
+
+                <p>
+                    Git, GitHub, Flask,
+                    MySQL
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects">
+
+        <h2>Projects</h2>
+
+        <!-- Featured Project -->
+        <div class="featured-project">
+
+            <div class="featured-content">
+
+                <h4>Featured Project ⭐</h4>
+
+                <h3>CitizenShield</h3>
+
+                <p>
+                    A comprehensive women safety platform
+                    that provides emergency SOS alerts,
+                    live location tracking,
+                    emergency contacts,
+                    helplines, and safety resources.
+                </p>
+
+                <div class="project-tech">
+
+                    <span>Flask</span>
+                    <span>PostgreSQL</span>
+                    <span>JavaScript</span>
+                    <span>Render</span>
+
+                </div>
+
+                <div class="project-buttons">
+
+                    <a href="https://24a31a05kp.github.io/CitizenSheild/"
+                        target="_blank"
+                        class="btn resume-btn">
+
+                        Live Demo
+                    </a>
+
+                    <a href="https://github.com/24A31A05KP/CitizenSheild"
+                        target="_blank"
+                        class="btn contact-btn">
+
+                        GitHub
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Dynamic Projects -->
+        <div class="projects-container">
+
+            {% for project in projects %}
+
+            <div class="project-card">
+
+                <h3>{{ project[1] }}</h3>
+
+                <p>{{ project[2] }}</p>
+
+                <small>{{ project[3] }}</small>
+
+                <div class="project-buttons">
+
+                    <a href="{{ project[4] }}"
+                        target="_blank"
+                        class="btn contact-btn">
+
+                        GitHub
+                    </a>
+
+                    <a href="{{ project[5] }}"
+                        target="_blank"
+                        class="btn resume-btn">
+
+                        Live Demo
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience">
+
+        <h2>Experience</h2>
+
+        <div class="experience-card">
+
+            <h3>Thiranex Internship</h3>
+
+            <p>
+                Worked on full-stack web development tasks,
+                portfolio development,
+                and gained practical exposure
+                to real-world project building.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ================= EDUCATION ================= -->
+    <section id="education">
+
+        <h2>Education</h2>
+
+        <div class="education-card">
+
+            <h3>Pragati Engineering College</h3>
+
+            <p>
+                B.Tech — Computer Science Engineering
+            </p>
+
+            <p>
+                2024 — 2028
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ================= PROFILES ================= -->
+    <section id="profiles">
+
+        <h2>Coding Profiles</h2>
+
+        <div class="profile-links">
+
+            <a href="https://github.com/24A31A05KP"
+                target="_blank">
+
+                <i class="fab fa-github"></i>
+                GitHub
+            </a>
+
+            <a href="https://www.linkedin.com/in/sai-bharat-kumar-illa-088071311"
+                target="_blank">
+
+                <i class="fab fa-linkedin"></i>
+                LinkedIn
+            </a>
+
+            <a href="https://leetcode.com/u/24A31A05kp/"
+                target="_blank">
+
+                <i class="fas fa-code"></i>
+                LeetCode
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact">
+
+        <h2>Contact Me</h2>
+
+        <form method="POST" action="/contact">
+
+            <input type="text"
+                name="name"
+                placeholder="Your Name"
+                required>
+
+            <input type="email"
+                name="email"
+                placeholder="Your Email"
+                required>
+
+            <textarea
+                name="message"
+                placeholder="Your Message"
+                required></textarea>
+
+            <button type="submit">
+
+                Send Message
+
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+
+        <p>
+            © 2026 ILLA SAI BHARAT KUMAR.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

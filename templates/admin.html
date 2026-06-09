@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- ================= ADMIN HEADER ================= -->
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Admin<span>.</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="/">
+                        Portfolio
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/logout">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <!-- ================= ADMIN SECTION ================= -->
+    <section class="admin-section">
+
+        <h1>Admin Dashboard</h1>
+        <br>
+        <div class="stats-container">
+
+    <div class="stat-card">
+        <strong><p>projects</p></strong>
+        <h2>{{ project_count }}</h2>
+
+
+    </div>
+
+    <div class="stat-card">
+        <strong><p>Messages</p></strong>
+        <h2>{{ message_count }}</h2>
+
+
+    </div>
+
+</div>
+        <!-- Add Project -->
+        <div class="admin-card">
+
+    {% if edit_project %}
+
+    <h2>Edit Project</h2>
+
+    <form method="POST"
+        action="/update-project/{{ edit_project[0] }}">
+
+        <input type="text"
+            name="title"
+            value="{{ edit_project[1] }}"
+            required>
+
+        <textarea
+            name="description"
+            required>{{ edit_project[2] }}</textarea>
+
+        <input type="text"
+            name="tech_stack"
+            value="{{ edit_project[3] }}"
+            required>
+
+        <input type="url"
+            name="github"
+            value="{{ edit_project[4] }}"
+            required>
+
+        <input type="url"
+            name="live"
+            value="{{ edit_project[5] }}"
+            required>
+
+        <button type="submit">
+            Update Project
+        </button>
+
+    </form>
+
+    {% else %}
+
+    <h2>Add Project</h2>
+
+    <form method="POST"
+        action="/add-project">
+
+        <input type="text"
+            name="title"
+            placeholder="Project Title"
+            required>
+
+        <textarea
+            name="description"
+            placeholder="Project Description"
+            required></textarea>
+
+        <input type="text"
+            name="tech_stack"
+            placeholder="Tech Stack"
+            required>
+
+        <input type="url"
+            name="github"
+            placeholder="GitHub Link"
+            required>
+
+        <input type="url"
+            name="live"
+            placeholder="Live Demo Link"
+            required>
+
+        <button type="submit">
+            Add Project
+        </button>
+
+    </form>
+
+    {% endif %}
+
+</div>
+<div class="admin-card">
+
+    <h2>Upload Resume</h2>
+
+    <form method="POST"
+        action="/upload-resume"
+        enctype="multipart/form-data">
+
+        <input type="file"
+            name="resume"
+            accept=".pdf"
+            required>
+
+        <button type="submit">
+
+            Upload Resume
+
+        </button>
+
+    </form>
+
+</div>
+        <!-- Projects Table -->
+        <div class="admin-card">
+
+            <h2>Manage Projects</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Title</th>
+
+                        <th>Tech Stack</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for project in projects %}
+
+                    <tr>
+
+                        <td>
+                            {{ project[1] }}
+                        </td>
+
+                        <td>
+                            {{ project[3] }}
+                        </td>
+
+                        <td>
+
+                       <a href="/admin?edit={{ project[0] }}"
+                           class="edit-btn">
+
+                           Edit
+                       </a>
+
+                       <a href="/delete-project/{{ project[0] }}"
+                           class="delete-btn">
+
+                           Delete
+                       </a>
+
+                   </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Contact Messages -->
+        <div class="admin-card">
+
+            <h2>Contact Messages</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+
+                        <th>Email</th>
+
+                        <th>Message</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for message in messages %}
+
+                    <tr>
+
+                    <td>{{ message[1] }}</td>
+
+                    <td>{{ message[2] }}</td>
+
+                    <td>{{ message[3] }}</td>
+
+                    <td>
+
+                        <a href="/delete-message/{{ message[0] }}"
+                            class="delete-btn">
+
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
